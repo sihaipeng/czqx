@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czqx.ordinary.mapper.UserMapper">
+    <select id="getAll" resultType="com.czqx.ordinary.domain.UserDO">
+        SELECT id,name,nick_name,status FROM sys_user WHERE del_flag = 0
+    </select>
+
+    <insert id="insert" parameterType="com.czqx.ordinary.domain.UserDO">
+        INSERT INTO sys_user
+        (
+          name,
+          nick_name,
+          password
+        )
+        VALUES
+        (
+          #{name},
+          #{nickName},
+          #{password}
+        )
+    </insert>
+
+    <select id="get" parameterType="long" resultType="com.czqx.ordinary.domain.UserDO">
+        SELECT id,name,nick_name,status FROM sys_user WHERE id = #{value}
+    </select>
+
+    <update id="remove" parameterType="long">
+        UPDATE sys_user SET del_flag = 1 WHERE id = #{value}
+    </update>
+
+    <select id="getList" resultType="com.czqx.ordinary.domain.UserDO">
+        SELECT id,name,nick_name,status FROM sys_user
+        <where>del_flag = 0
+            <if test="name != null and name != ''">and name LIKE concat('%',#{name},'%')</if>
+            <if test="nickName != null and nickName != ''">and nick_name LIKE concat('%',#{nickName},'%')</if>
+        </where>
+        <if test="limit != null">
+            limit #{limit},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) from sys_user
+        <where>del_flag = 0
+            <if test="name != null and name != ''">and name LIKE concat('%',#{name},'%')</if>
+            <if test="nickName != null and nickName != ''">and nick_name LIKE concat('%',#{nickName},'%')</if>
+        </where>
+    </select>
+
+    <update id="update" parameterType="com.czqx.ordinary.domain.UserDO">
+        UPDATE sys_user
+        <set>
+            <if test="nickName != null and nickName != ''">nick_name = #{nickName}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+</mapper>

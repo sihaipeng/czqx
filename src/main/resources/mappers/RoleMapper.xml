@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czqx.ordinary.mapper.RoleMapper">
+    <insert id="insert" parameterType="com.czqx.ordinary.domain.RoleDO">
+        INSERT INTO sys_role
+        (
+          name,
+          remark
+        )
+        VALUES
+        (
+          #{name},
+          #{remark}
+        )
+    </insert>
+
+    <select id="getList" resultType="com.czqx.ordinary.domain.RoleDO">
+        SELECT id,name,remark FROM sys_role
+        <where>del_flag = 0
+            <if test="name != null and name != ''">and name LIKE concat('%',#{name},'%')</if>
+        </where>
+        <if test="limit != null">
+            limit #{limit},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) FROM sys_role
+        <where>del_flag = 0
+            <if test="name != null and name != ''">and name LIKE concat('%',#{name},'%')</if>
+        </where>
+    </select>
+
+    <select id="get" resultType="com.czqx.ordinary.domain.RoleDO" parameterType="long">
+        SELECT id,name,remark,del_flag FROM sys_role WHERE id = #{value}
+    </select>
+
+    <update id="remove" parameterType="long">
+        UPDATE sys_role SET del_flag = 1 WHERE id = #{value}
+    </update>
+
+    <update id="update" parameterType="com.czqx.ordinary.domain.RoleDO">
+        UPDATE sys_role
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

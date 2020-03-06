@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czqx.ordinary.mapper.MenuMapper">
+
+    <select id="getList" resultType="com.czqx.ordinary.domain.MenuDO">
+      SELECT id,name,icon,url,type,pid FROM sys_menu
+      <where>del_flag = 0
+          <if test="name != null and name != ''">and name like concat('%',#{name},'%')</if>
+          <if test="pId != null and pId != ''">and pid = #{pId}</if>
+          <choose>
+              <when test="type != null and type != ''">and type = #{type}</when>
+              <otherwise>and type = 0</otherwise>
+          </choose>
+      </where>
+      <if test="limit != null">
+          limit #{limit},#{pageSize}
+      </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+      SELECT COUNT(*) FROM sys_menu
+      <where>del_flag = 0
+          <if test="name != null and name != ''">and name LIKE concat('%',#{name},'%')</if>
+          <if test="pId != null and pId != ''">and pid = #{pId}</if>
+      </where>
+    </select>
+
+    <select id="get" parameterType="long" resultType="com.czqx.ordinary.domain.MenuDO">
+      SELECT id,name,icon,url,type,pid FROM sys_menu WHERE id = #{value}
+    </select>
+
+    <insert id="insert" parameterType="com.czqx.ordinary.domain.MenuDO">
+      INSERT INTO sys_menu
+      (
+        name,
+        icon,
+        url,
+        type,
+        pid
+      )
+      VALUES
+      (
+        #{name},
+        #{icon},
+        #{url},
+        #{type},
+        #{pId}
+      )
+    </insert>
+
+    <update id="remove" parameterType="long">
+      UPDATE sys_menu SET del_flag = 1 WHERE id = #{value}
+    </update>
+
+    <update id="update" parameterType="com.czqx.ordinary.domain.MenuDO">
+      UPDATE sys_menu
+      <set>
+          <if test="name != null and name != ''">name = #{name},</if>
+          <if test="icon != null and icon != ''">icon = #{icon},</if>
+          <if test="url != null and url != ''">url = #{url},</if>
+          <if test="type != null">type = #{type},</if>
+      </set>
+      WHERE id = #{id}
+    </update>
+</mapper>
