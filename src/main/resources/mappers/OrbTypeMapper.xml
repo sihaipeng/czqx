@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czqx.mhw.mapper.OrbTypeMapper">
+
+    <select id="getList" resultType="com.czqx.mhw.domain.OrbTypeDO">
+        SELECT id,name,rares FROM mhw_orb_type
+        <if test="limit != null">limit #{limit},#{pageSize}</if>
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM mhw_orb_type
+    </select>
+
+    <insert id="insert" parameterType="com.czqx.mhw.domain.OrbTypeDO">
+        INSERT INTO mhw_orb_type
+        (
+          name,rares
+        )
+        VALUES
+        (
+          #{name},
+          #{rares}
+        )
+    </insert>
+</mapper>

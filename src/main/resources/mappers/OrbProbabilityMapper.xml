@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czqx.mhw.mapper.OrbProbabilityMapper">
+
+    <select id="getList" resultType="com.czqx.mhw.domain.OrbProbabilityDO">
+        SELECT id,orb_type_id,orb_rank_id,probability FROM mhw_orb_probability
+        <if test="limit != null">limit #{limit},#{pageSize}</if>
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM mhw_orb_probability
+    </select>
+
+    <insert id="insert" parameterType="com.czqx.mhw.domain.OrbProbabilityDO">
+        INSERT INTO mhw_orb_probability
+        (
+          orb_type_id,
+          orb_rank_id,
+          probability
+        )
+        VALUES
+        (
+          #{orbTypeId},
+          #{orbRankId},
+          #{probability}
+        )
+    </insert>
+
+</mapper>
