@@ -11,4 +11,5 @@ public interface OrbMapper {
     List<OrbDO> getList(QueryUtil query);
     int count(QueryUtil query);
     int insert(OrbDO orbDO);
+
 }

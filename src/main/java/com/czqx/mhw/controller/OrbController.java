@@ -1,6 +1,7 @@
 package com.czqx.mhw.controller;
 
 import com.czqx.mhw.domain.OrbDO;
+import com.czqx.mhw.mapper.OrbMapper;
 import com.czqx.mhw.service.OrbService;
 import com.czqx.ordinary.exception.BaseException;
 import com.czqx.utils.PageUtil;
@@ -18,6 +19,9 @@ public class OrbController {
     @Autowired
     OrbService orbService;
 
+    @Autowired
+    OrbMapper orbMapper;
+
     @GetMapping("/list")
     public PageUtil getList(@RequestParam Map<String,Object> map){
         QueryUtil query = new QueryUtil(map);
@@ -33,5 +37,6 @@ public class OrbController {
         }
         return true;
     }
+
 
 }

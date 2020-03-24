@@ -3,8 +3,9 @@ package com.czqx.ordinary.controller;
 import com.czqx.ordinary.domain.UserDO;
 import com.czqx.ordinary.exception.BaseException;
 import com.czqx.ordinary.service.UserService;
-import com.czqx.ordinary.utils.PageUtil;
-import com.czqx.ordinary.utils.QueryUtil;
+import com.czqx.utils.PageUtil;
+import com.czqx.utils.QueryUtil;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/list")
+    @RequiresPermissions("sys:user")
     public PageUtil getList(@RequestParam Map<String,Object> map){
         QueryUtil query = new QueryUtil(map);
         List<UserDO> list = userService.getList(query);
@@ -60,4 +62,5 @@ public class UserController {
         }
         return true;
     }
+
 }

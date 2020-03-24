@@ -13,4 +13,5 @@ public class MenuDO implements Serializable {
     private int type;
     private int delFlag;
     private long pId;
+    private String perm;
 }

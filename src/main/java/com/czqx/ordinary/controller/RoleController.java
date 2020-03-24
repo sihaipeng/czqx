@@ -3,8 +3,8 @@ package com.czqx.ordinary.controller;
 import com.czqx.ordinary.domain.RoleDO;
 import com.czqx.ordinary.exception.BaseException;
 import com.czqx.ordinary.service.RoleService;
-import com.czqx.ordinary.utils.PageUtil;
-import com.czqx.ordinary.utils.QueryUtil;
+import com.czqx.utils.PageUtil;
+import com.czqx.utils.QueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

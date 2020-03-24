@@ -1,7 +1,7 @@
 package com.czqx.ordinary.service;
 
 import com.czqx.ordinary.domain.RoleDO;
-import com.czqx.ordinary.utils.QueryUtil;
+import com.czqx.utils.QueryUtil;
 
 import java.util.List;
 

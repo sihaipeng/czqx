@@ -5,7 +5,7 @@
 <mapper namespace="com.czqx.ordinary.mapper.MenuMapper">
 
     <select id="getList" resultType="com.czqx.ordinary.domain.MenuDO">
-      SELECT id,name,icon,url,type,pid FROM sys_menu
+      SELECT id,name,icon,url,type,pid,perm FROM sys_menu
       <where>del_flag = 0
           <if test="name != null and name != ''">and name like concat('%',#{name},'%')</if>
           <if test="pId != null and pId != ''">and pid = #{pId}</if>
@@ -28,7 +28,7 @@
     </select>
 
     <select id="get" parameterType="long" resultType="com.czqx.ordinary.domain.MenuDO">
-      SELECT id,name,icon,url,type,pid FROM sys_menu WHERE id = #{value}
+      SELECT id,name,icon,url,type,pid,perm FROM sys_menu WHERE id = #{value}
     </select>
 
     <insert id="insert" parameterType="com.czqx.ordinary.domain.MenuDO">
@@ -38,7 +38,8 @@
         icon,
         url,
         type,
-        pid
+        pid,
+        perm
       )
       VALUES
       (
@@ -46,7 +47,8 @@
         #{icon},
         #{url},
         #{type},
-        #{pId}
+        #{pId},
+        #{perm}
       )
     </insert>
 
@@ -61,7 +63,24 @@
           <if test="icon != null and icon != ''">icon = #{icon},</if>
           <if test="url != null and url != ''">url = #{url},</if>
           <if test="type != null">type = #{type},</if>
+          <if test="perm != null and perm != ''">perm #{perm},</if>
       </set>
       WHERE id = #{id}
     </update>
+
+    <select id="getAllByPId" resultType="com.czqx.ordinary.domain.MenuDO" parameterType="long">
+        SELECT id,name,icon,url,type,pid,perm FROM sys_menu WHERE pid = #{value}
+    </select>
+
+    <select id="getAll" resultType="com.czqx.ordinary.domain.MenuDO" parameterType="long">
+        SELECT id,name,icon,url,type,pid,perm FROM sys_menu WHERE del_flag = 0
+    </select>
+
+    <select id="getByType" resultType="com.czqx.ordinary.domain.MenuDO" parameterType="int">
+        SELECT id,name,icon,url,type,pid,perm FROM sys_menu WHERE del_flag = 0 and type = #{value}
+    </select>
+
+    <select id="getMenus" parameterType="list" resultType="long">
+        SELECT menu_id FROM sys_role_menu WHERE role_id = #{value}
+    </select>
 </mapper>

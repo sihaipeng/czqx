@@ -3,7 +3,7 @@ package com.czqx.ordinary.service.impl;
 import com.czqx.ordinary.domain.UserDO;
 import com.czqx.ordinary.mapper.UserMapper;
 import com.czqx.ordinary.service.UserService;
-import com.czqx.ordinary.utils.QueryUtil;
+import com.czqx.utils.QueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +47,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public int update(UserDO userDO) {
         return userMapper.update(userDO);
+    }
+
+    @Override
+    public UserDO getByName(String name) {
+        return userMapper.getByName(name);
     }
 }

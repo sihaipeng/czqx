@@ -1,7 +1,7 @@
 package com.czqx.ordinary.mapper;
 
 import com.czqx.ordinary.domain.RoleDO;
-import com.czqx.ordinary.utils.QueryUtil;
+import com.czqx.utils.QueryUtil;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,4 +14,6 @@ public interface RoleMapper {
     RoleDO get(long id);
     int remove(long id);
     int update(RoleDO roleDO);
+
+    List<Long> getMenus(long id);
 }

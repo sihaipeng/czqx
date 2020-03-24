@@ -3,7 +3,7 @@ package com.czqx.ordinary.service.impl;
 import com.czqx.ordinary.domain.RoleDO;
 import com.czqx.ordinary.mapper.RoleMapper;
 import com.czqx.ordinary.service.RoleService;
-import com.czqx.ordinary.utils.QueryUtil;
+import com.czqx.utils.QueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

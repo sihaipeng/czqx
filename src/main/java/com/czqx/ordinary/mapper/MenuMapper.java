@@ -1,7 +1,7 @@
 package com.czqx.ordinary.mapper;
 
 import com.czqx.ordinary.domain.MenuDO;
-import com.czqx.ordinary.utils.QueryUtil;
+import com.czqx.utils.QueryUtil;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,4 +14,9 @@ public interface MenuMapper {
     int insert(MenuDO menuDO);
     int update(MenuDO menuDO);
     int remove(long id);
+    List<MenuDO> getAllByPId(long pId);
+    List<MenuDO> getAll();
+    List<MenuDO> getByType(int value);
+
+    List<Long> getMenus(long roleId);
 }

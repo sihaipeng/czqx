@@ -50,4 +50,8 @@
         where id = #{id}
     </update>
 
+    <select id="getMenus" parameterType="long" resultType="long">
+        SELECT menu_id FROM sys_role_menu WHERE role_id = #{value}
+    </select>
+
 </mapper>

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.czqx.ordinary.mapper.UserMapper">
     <select id="getAll" resultType="com.czqx.ordinary.domain.UserDO">
-        SELECT id,name,nick_name,status FROM sys_user WHERE del_flag = 0
+        SELECT id,name,password,nick_name,status FROM sys_user WHERE del_flag = 0
     </select>
 
     <insert id="insert" parameterType="com.czqx.ordinary.domain.UserDO">
@@ -23,7 +23,7 @@
     </insert>
 
     <select id="get" parameterType="long" resultType="com.czqx.ordinary.domain.UserDO">
-        SELECT id,name,nick_name,status FROM sys_user WHERE id = #{value}
+        SELECT id,name,password,nick_name,status FROM sys_user WHERE id = #{value}
     </select>
 
     <update id="remove" parameterType="long">
@@ -56,4 +56,13 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <select id="getByName" parameterType="string" resultType="com.czqx.ordinary.domain.UserDO">
+        SELECT id,name,password,nick_name,status FROM sys_user WHERE del_flag = 0 and name = #{value}
+    </select>
+
+    <select id="getRole" parameterType="long" resultType="long">
+        SELECT role_id FROM sys_user_role WHERE user_id = #{value}
+
+    </select>
 </mapper>

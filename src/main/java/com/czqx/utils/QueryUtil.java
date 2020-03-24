@@ -1,4 +1,4 @@
-package com.czqx.ordinary.utils;
+package com.czqx.utils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

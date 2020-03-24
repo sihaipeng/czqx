@@ -1,7 +1,8 @@
 package com.czqx.ordinary.mapper;
 
+import com.czqx.ordinary.domain.RoleDO;
 import com.czqx.ordinary.domain.UserDO;
-import com.czqx.ordinary.utils.QueryUtil;
+import com.czqx.utils.QueryUtil;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,4 +16,8 @@ public interface UserMapper{
     List<UserDO> getList(QueryUtil query);
     int getCount(QueryUtil query);
     int update(UserDO userDO);
+
+    UserDO getByName(String name);
+
+    long getRole(long id);
 }

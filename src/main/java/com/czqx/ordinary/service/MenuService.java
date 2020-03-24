@@ -1,7 +1,7 @@
 package com.czqx.ordinary.service;
 
 import com.czqx.ordinary.domain.MenuDO;
-import com.czqx.ordinary.utils.QueryUtil;
+import com.czqx.utils.QueryUtil;
 
 import java.util.List;
 
@@ -12,4 +12,6 @@ public interface MenuService {
     int insert(MenuDO menuDO);
     int update(MenuDO menuDO);
     int remove(long id);
+    List<MenuDO> getAllByPId(long pId);
+    List<MenuDO> getAll();
 }

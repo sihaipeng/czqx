@@ -3,7 +3,7 @@ package com.czqx.ordinary.service.impl;
 import com.czqx.ordinary.domain.MenuDO;
 import com.czqx.ordinary.mapper.MenuMapper;
 import com.czqx.ordinary.service.MenuService;
-import com.czqx.ordinary.utils.QueryUtil;
+import com.czqx.utils.QueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +42,17 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public int remove(long id) {
         return menuMapper.remove(id);
+    }
+
+    @Override
+    public List<MenuDO> getAllByPId(long pId) {
+        return menuMapper.getAllByPId(pId);
+    }
+
+    @Override
+    public List<MenuDO> getAll() {
+        List<MenuDO> directoryList = menuMapper.getByType(0);
+
+        return menuMapper.getAll();
     }
 }
