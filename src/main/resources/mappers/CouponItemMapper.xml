@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czqx.coupon.mapper.CouponItemMapper">
+
+    <insert id="insert" parameterType="com.czqx.coupon.domain.CouponItemDO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO coupon_item
+        (
+          coupon_id,
+          bar_code
+        )
+        VALUES
+        (
+          #{couponId},
+          #{barCode}
+        )
+    </insert>
+
+    <select id="getByBarCode" resultType="com.czqx.coupon.domain.CouponVO">
+        SELECT b.name,b.discount_price,b.use_threshold,b.use_start_time,b.use_end_time FROM coupon_item a
+         LEFT JOIN coupon b
+         ON a.coupon_id = b.id
+         WHERE a.bar_code = #{value}
+    </select>
+
+    <update id="writeOff" parameterType="string">
+        UPDATE coupon_item SET status = 1 WHERE bar_code = #{value}
+    </update>
+</mapper>
